@@ -15,10 +15,11 @@ RUN apk add --no-cache curl
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY prisma ./prisma
+COPY .env ./.env
 # RUN npm install -g pm2 npm@latest
 RUN npm install -g pm2 
 RUN npm ci --production
-RUN npx prisma db push
+RUN npx prisma db push --schema=prisma/schema.prisma
 COPY --from=builder /app/build ./build
 
 EXPOSE 4010

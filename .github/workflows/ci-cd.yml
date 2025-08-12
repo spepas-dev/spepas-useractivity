@@ -43,6 +43,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      
+      - name: Set Up Environment Variables
+        run: |
+          echo DATABASE_URL=${{ secrets.DATABASE_URL }} > .env
+          cat .env
 
       - name: Install Dependencies
         run: npm install
