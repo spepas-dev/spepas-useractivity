@@ -22,7 +22,7 @@ export type UserActivity = {
   country: string;
   city: string;
   deviceIpAddress: string;
-  deviceTpe: string;
+  deviceType: string;
   browserName?: string | null;
   createdAt: Date;
 };

@@ -31,7 +31,7 @@ export async function create(req: Request, res: Response): Promise<void> {
     const country = faker.location.country();
     const city = faker.location.city();
     const deviceIpAddress = sample(ip);
-    const deviceTpe = sample(Type);
+    const deviceType = sample(Type);
     const browserName = sample(Browser);
 
     const activityData: UserActivity = {
@@ -48,7 +48,7 @@ export async function create(req: Request, res: Response): Promise<void> {
       country,
       city,
       deviceIpAddress,
-      deviceTpe,
+      deviceType,
       browserName
     } as UserActivity;
     await prisma.userActivity.createMany({ data: activityData });
