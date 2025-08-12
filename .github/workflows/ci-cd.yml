@@ -45,6 +45,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      # Generate Prisma db
       - name: Generate Prisma Db
         run: npx prisma db push
 
