@@ -7,7 +7,7 @@ COPY src ./src
 COPY prisma ./prisma
 # RUN npm install -g npm@latest
 RUN npm ci && npm run build
-RUN npx prisma db push --schema=prisma/schema.prisma
+RUN npx prisma db push
 
 FROM node:21-alpine3.18
 
