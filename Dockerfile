@@ -16,6 +16,7 @@ COPY tsconfig.json ./
 # RUN npm install -g pm2 npm@latest
 RUN npm install -g pm2 
 RUN npm ci --production
+RUN npx prisma generate
 COPY --from=builder /app/build ./build
 
 EXPOSE 4010
