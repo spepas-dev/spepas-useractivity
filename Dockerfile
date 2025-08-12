@@ -14,6 +14,7 @@ WORKDIR /app
 RUN apk add --no-cache curl
 COPY package*.json ./
 COPY tsconfig.json ./
+COPY prisma ./prisma
 # RUN npm install -g pm2 npm@latest
 RUN npm install -g pm2 
 RUN npm ci --production
