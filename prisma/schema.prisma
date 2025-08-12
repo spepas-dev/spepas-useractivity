@@ -29,7 +29,7 @@ model UserActivity {
   country         String
   city            String
   deviceIpAddress String
-  deviceTpe       String
+  deviceType      String
   browserName     String?
   createdAt       DateTime @default(now())
 
