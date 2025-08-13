@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getAllUserActivities(req: Request, res: Response) {
   try {
-    const { page = 1, limit = 10, search = '', channel, startDate, endDate } = req.query;
+    const { page = 1, limit = 10, search = '', channel, statusCode, startDate, endDate } = req.query;
 
     const startDateParam = startDate as string | undefined;
     const endDateParam = endDate as string | undefined;
@@ -19,9 +19,9 @@ export async function getAllUserActivities(req: Request, res: Response) {
     // Search across multiple fields
     if (search) {
       where.OR = [
-        { statusCode: { contains: search, mode: 'insensitive' } },
+        { country: { contains: search, mode: 'insensitive' } },
         { city: { contains: search, mode: 'insensitive' } },
-        { deviceTpe: { contains: search, mode: 'insensitive' } },
+        { deviceType: { contains: search, mode: 'insensitive' } },
         { browserName: { contains: search, mode: 'insensitive' } }
       ];
     }
@@ -30,6 +30,12 @@ export async function getAllUserActivities(req: Request, res: Response) {
     if (channel) {
       where.channel = channel;
     }
+
+    // Filter by statusCode
+    if (statusCode) {
+      where.statusCode = Number(statusCode);
+    }
+
     // Date range filter
     if (startDateParam && endDateParam) {
       where.createdAt = {
@@ -50,6 +56,8 @@ export async function getAllUserActivities(req: Request, res: Response) {
     ]);
 
     res.json({
+      status: 1,
+      message: 'Successful.',
       data: useractivities,
       meta: {
         total,
@@ -66,7 +74,7 @@ export async function getAllUserActivities(req: Request, res: Response) {
 
 export async function getAllUserActivitiesById(req: Request, res: Response) {
   try {
-    const { page = 1, limit = 10, search = '', channel, startDate, endDate } = req.query;
+    const { page = 1, limit = 10, search = '', channel, statusCode, startDate, endDate } = req.query;
     const { userId } = req.params;
 
     const startDateParam = startDate as string | undefined;
@@ -86,9 +94,9 @@ export async function getAllUserActivitiesById(req: Request, res: Response) {
     if (search) {
       // Search across multiple fields
       where.OR = [
-        { statusCode: { contains: search, mode: 'insensitive' } },
+        { country: { contains: search, mode: 'insensitive' } },
         { city: { contains: search, mode: 'insensitive' } },
-        { deviceTpe: { contains: search, mode: 'insensitive' } },
+        { deviceType: { contains: search, mode: 'insensitive' } },
         { browserName: { contains: search, mode: 'insensitive' } }
       ];
     }
@@ -97,6 +105,12 @@ export async function getAllUserActivitiesById(req: Request, res: Response) {
     if (channel) {
       where.channel = channel;
     }
+
+    // Filter by statusCode
+    if (statusCode) {
+      where.statusCode = Number(statusCode);
+    }
+
     // Date range filter
     if (startDateParam && endDateParam) {
       where.createdAt = {
@@ -117,6 +131,8 @@ export async function getAllUserActivitiesById(req: Request, res: Response) {
     ]);
 
     res.json({
+      status: 1,
+      message: 'Successful.',
       data: useractivities,
       meta: {
         total,
