@@ -10,7 +10,6 @@ export type JsonValue = string | number | boolean | null | JsonValue[] | { [key:
 export type UserActivity = {
   id: string;
   userId?: string | null;
-  userEmail: string;
   channel: Channel; // Replace with `string` if Channel is not an enum
   title: string;
   description: string;
@@ -19,10 +18,11 @@ export type UserActivity = {
   endpoint?: string | null;
   requestBody?: JsonValue | null;
   statusCode?: number | null;
-  country: string;
-  city: string;
-  deviceIpAddress: string;
-  deviceType: string;
+  country?: string;
+  city?: string;
+  deviceIpAddress?: string;
+  deviceOs?: string;
+  deviceType?: string;
   browserName?: string | null;
   createdAt: Date;
 };

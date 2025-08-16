@@ -16,7 +16,6 @@ datasource db {
 model UserActivity {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   userId          String?
-  userEmail       String?
   channel         Channel
   title           String
   description     String
@@ -26,10 +25,11 @@ model UserActivity {
   requestBody     Json?
   statusCode      Int?
   responseMessage String?
-  country         String
-  city            String
-  deviceIpAddress String
-  deviceType      String
+  country         String?
+  city            String?
+  deviceIpAddress String?
+  deviceType      String?
+  deviceOs        String?
   browserName     String?
   createdAt       DateTime @default(now())
 

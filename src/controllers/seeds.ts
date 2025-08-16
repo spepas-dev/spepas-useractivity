@@ -14,12 +14,12 @@ export async function create(req: Request, res: Response): Promise<void> {
   const Action = ['Sign_In', 'Accept_Bid', 'Create_Request', 'Browse_Product'];
   const Verb = ['POST', 'PUT', 'GET', ''];
   const ip = ['52.155.95.103', '10.0.86.66', '10.0.83.180', '10.0.65.14'];
-  const Type = ['Macbook', 'Windows', 'Adroid', 'IOS'];
+  const Os = ['Macbook', 'Windows', 'Adroid', 'IOS'];
+  const Type = ['Desktop', 'Mobile'];
   const Browser = ['Chrome', 'Safari', 'Firefox', 'Edge'];
 
   for (let i = 0; i < parseInt(count, 10); i++) {
     const userId = uuidV4();
-    const userEmail = faker.internet.email();
     const channel = sample(Channel);
     const title = sample(Title);
     const description = 'randomCharacters';
@@ -31,12 +31,12 @@ export async function create(req: Request, res: Response): Promise<void> {
     const country = faker.location.country();
     const city = faker.location.city();
     const deviceIpAddress = sample(ip);
+    const deviceOs = sample(Os);
     const deviceType = sample(Type);
     const browserName = sample(Browser);
 
     const activityData: UserActivity = {
       userId,
-      userEmail,
       channel,
       title,
       description,
@@ -48,6 +48,7 @@ export async function create(req: Request, res: Response): Promise<void> {
       country,
       city,
       deviceIpAddress,
+      deviceOs,
       deviceType,
       browserName
     } as UserActivity;
