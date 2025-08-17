@@ -2,7 +2,8 @@ export enum Channel {
   USSD = 'USSD',
   MOBILE = 'MOBILE',
   WEBAPP = 'WEBAPP',
-  WEBADMIN = 'WEBADMIN'
+  WEBADMIN = 'WEBADMIN',
+  GATEWAY = 'GATEWAY'
 }
 
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };

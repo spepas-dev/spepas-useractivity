@@ -41,4 +41,5 @@ enum Channel {
   MOBILE
   WEBAPP
   WEBADMIN
+  GATEWAY
 }

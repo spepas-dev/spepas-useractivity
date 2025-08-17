@@ -9,7 +9,7 @@ import { v4 as uuidV4 } from 'uuid';
 export async function create(req: Request, res: Response): Promise<void> {
   const { count } = req.params;
 
-  const Channel = ['USSD', 'MOBILE', 'WEBAPP', 'WEBADMIN'];
+  const Channel = ['USSD', 'MOBILE', 'WEBAPP', 'WEBADMIN', 'GATEWAY'];
   const Title = ['Sign In', 'Accept Bid', 'Create Request', 'Browse Product'];
   const Action = ['Sign_In', 'Accept_Bid', 'Create_Request', 'Browse_Product'];
   const Verb = ['POST', 'PUT', 'GET', ''];
