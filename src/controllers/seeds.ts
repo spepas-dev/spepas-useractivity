@@ -30,6 +30,8 @@ export async function create(req: Request, res: Response): Promise<void> {
     const statusCode = 200;
     const country = faker.location.country();
     const city = faker.location.city();
+    const latitude = 1.4556;
+    const longitude = 0.56788;
     const deviceIpAddress = sample(ip);
     const deviceOs = sample(Os);
     const deviceType = sample(Type);
@@ -47,6 +49,8 @@ export async function create(req: Request, res: Response): Promise<void> {
       statusCode,
       country,
       city,
+      latitude,
+      longitude,
       deviceIpAddress,
       deviceOs,
       deviceType,

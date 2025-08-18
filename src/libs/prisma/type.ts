@@ -21,6 +21,8 @@ export type UserActivity = {
   statusCode?: number | null;
   country?: string;
   city?: string;
+  latitude?: number | null;
+  longitude?: number | null;
   deviceIpAddress?: string;
   deviceOs?: string;
   deviceType?: string;
