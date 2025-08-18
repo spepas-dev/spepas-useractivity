@@ -27,6 +27,8 @@ model UserActivity {
   responseMessage String?
   country         String?
   city            String?
+  latitude        Float?
+  longitude       Float?
   deviceIpAddress String?
   deviceType      String?
   deviceOs        String?
