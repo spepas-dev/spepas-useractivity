@@ -1,13 +1,16 @@
 import http from 'http';
 
 import { config } from '@useractivity/config';
-import runAuthConsumer from '@useractivity/libs/kafka/auth.consumer';
-import runOrderConsumer from '@useractivity/libs/kafka/order.consumer';
-import runOtpConsumer from '@useractivity/libs/kafka/otp.consumer';
-import runProductConsumer from '@useractivity/libs/kafka/product.consumer';
-import runUserConsumer from '@useractivity/libs/kafka/user.consumer';
+// import runAuthConsumer from '@useractivity/libs/kafka/auth.consumer';
+// import runOrderConsumer from '@useractivity/libs/kafka/order.consumer';
+// import runOtpConsumer from '@useractivity/libs/kafka/otp.consumer';
+// import runProductConsumer from '@useractivity/libs/kafka/product.consumer';
+// import runUserConsumer from '@useractivity/libs/kafka/user.consumer';
 import { CustomError, IErrorResponse } from '@useractivity/middleware/error-handler';
+import { createConnection } from '@useractivity/queues/connection';
+import { consumeUserActivityDirectMessage } from '@useractivity/queues/useractivity.consumer';
 import { appRoutes } from '@useractivity/routes';
+import { Channel } from 'amqplib';
 import compression from 'compression';
 import cors from 'cors';
 import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
@@ -21,7 +24,8 @@ export function start(app: Application): void {
   securityMiddleware(app);
   standardMiddleware(app);
   routesMiddleware(app);
-  startConsumers();
+  startQueues();
+  // startConsumers();
   userActivitiesErrorHandler(app);
   startServer(app);
 }
@@ -49,13 +53,18 @@ function routesMiddleware(app: Application): void {
   appRoutes(app);
 }
 
-async function startConsumers(): Promise<void> {
-  runAuthConsumer();
-  runOrderConsumer();
-  runOtpConsumer();
-  runProductConsumer();
-  runUserConsumer();
-}
+// async function startConsumers(): Promise<void> {
+//   runAuthConsumer();
+//   runOrderConsumer();
+//   runOtpConsumer();
+//   runProductConsumer();
+//   runUserConsumer();
+// }
+
+const startQueues = async (): Promise<void> => {
+  const userActivityChannel: Channel = (await createConnection()) as Channel;
+  await consumeUserActivityDirectMessage(userActivityChannel);
+};
 
 function userActivitiesErrorHandler(app: Application): void {
   app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {

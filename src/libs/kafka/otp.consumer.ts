@@ -1,34 +1,34 @@
-import prisma from '../prisma';
+// import prisma from '../prisma';
 
-import { kafkaconnection } from './connection';
+// import { kafkaconnection } from './connection';
 
-const consumer = kafkaconnection.consumer({ groupId: 'otp-service' });
+// const consumer = kafkaconnection.consumer({ groupId: 'otp-service' });
 
-const runOtpConsumer = async () => {
-  try {
-    await consumer.connect();
-    await consumer.subscribe({
-      topics: ['otp-service'],
-      fromBeginning: false
-    });
+// const runOtpConsumer = async () => {
+//   try {
+//     await consumer.connect();
+//     await consumer.subscribe({
+//       topics: ['otp-service'],
+//       fromBeginning: false
+//     });
 
-    await consumer.run({
-      eachMessage: async ({ message }) => {
-        const value = message?.value?.toString();
-        if (value) {
-          const data = JSON.parse(value);
+//     await consumer.run({
+//       eachMessage: async ({ message }) => {
+//         const value = message?.value?.toString();
+//         if (value) {
+//           const data = JSON.parse(value);
 
-          try {
-            await prisma.userActivity.create({ data });
-          } catch (error) {
-            console.log(error);
-          }
-        }
-      }
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+//           try {
+//             await prisma.userActivity.create({ data });
+//           } catch (error) {
+//             console.log(error);
+//           }
+//         }
+//       }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
-export default runOtpConsumer;
+// export default runOtpConsumer;
